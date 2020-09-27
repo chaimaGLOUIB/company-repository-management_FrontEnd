@@ -1,0 +1,68 @@
+<nb-card>
+    <nb-card-header>Type Consommable</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #n="ngForm" (ngSubmit)="onSubmit(n.value)">
+
+            <div>
+                <label>Marque_Consommable</label>
+                <input type="text" nbInput  fullWidth shape="round"   formControlName="marqueConsommable" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.marqueConsommable.errors }" />
+                <div *ngIf="submitted && f.marqueConsommable.errors" class="invalid-feedback">
+                    <div *ngIf="f.marqueConsommable.errors.required">Marque Consommable est requis</div>
+                    <div *ngIf="f.marqueConsommable.errors.marqueConsommable">Marque Consommable doit d'etre Hyden OU
+                        chark</div>
+
+                </div>
+
+            </div>
+            <div>
+                <label>Description</label>
+                <textarea type="text" nbInput fullWidth shape="round" placeholder="Description" formControlName="description" 
+                    [ngClass]="{ 'is-invalid': submitted && f.description.errors }" ></textarea>
+                <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                    <div *ngIf="f.description.errors.required">description est requis</div>
+                </div>
+            </div>
+
+
+
+            <div>
+                <label>Type_Consommable</label>
+                <nb-select formControlName="typeConsommable"  fullWidth shape="round" 
+                    [ngClass]="{ 'is-invalid': submitted && f.typeConsommable.errors }" *ngIf="typeConsommables">
+                    <option value=""></option>
+
+                    <option *ngFor="let r of typeConsommables" [value]="r">{{r.typeConsommable}}</option>
+
+                </nb-select>
+                <div *ngIf="submitted && f.typeConsommable.errors" class="invalid-feedback">
+                    <div *ngIf="f.typeConsommable.errors.required"> Type Consommable est requis</div>
+                </div>
+
+
+            </div>
+
+            <div>
+                <label>Etat</label>
+                <nb-select formControlName="etat" fullWidth shape="round" 
+                    [ngClass]="{ 'is-invalid': submitted && f.etat.errors }">
+                    <option value=""></option>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </nb-select>
+                <div *ngIf="submitted && f.etat.errors" class="invalid-feedback">
+                    <div *ngIf="f.etat.errors.required">etat est requis</div>
+                </div>
+            </div>
+
+            <hr>
+            <nb-card-footer>
+                <button class="cancel" nbButton status="danger" (click)="onClose()">Cancel</button> &nbsp;
+                <button nbButton status="success">Register</button>
+
+
+            </nb-card-footer>
+        </form>
+    </nb-card-body>
+
+</nb-card>

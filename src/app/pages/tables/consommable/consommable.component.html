@@ -1,0 +1,66 @@
+<nb-card>
+  <nb-card-header>
+    Consommable
+  </nb-card-header>
+
+  <nb-card-body>
+
+    <button class="float-right btn btn-primary" (click)="openDialog()"><i class="fa fa-plus"></i>Ajouter
+      Consommable</button>
+    <form #f="ngForm" (ngSubmit)="onChercher(f.value)">
+      <div class="form-group">
+        <label>Mot Clé </label>
+        <input type="text" name="cle" ngModel>
+
+        <button type="submit" class="btn btn-primary">Chercher</button>
+      </div>
+
+    </form>
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+            <th scope="col">Consommable</th>
+            <th scope="col">N° Serie</th>
+            <th scope="col">Description</th>
+            <th scope="col">Marque_Consommable</th>
+            <th scope="col">etat</th>
+           
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="consommables">
+        <tr *ngFor="let p of consommables">
+
+            <td>{{p.nom}}</td>
+            <td>{{p.numSerie}}</td>
+            <td>{{p.description}}</td>
+            <td *ngIf='!p.marque'> </td>
+            <td *ngIf='p.marque'>{{p.marque.marqueConsommable}}</td>
+           
+            <td>{{p.etat}}</td>
+
+           
+
+
+            <td>
+              <button nbButton status="success" (click)="openDialogEdit(r.id)" ><i class="fa fa-edit"></i>Editer</button>&nbsp;
+              <button  nbButton status="danger" (click)="Supprimer(r.id)"><i class="nb nb-trash"></i>Supprimer</button> 
+              
+        </td>
+        </tr>
+
+
+    </tbody>
+    </table>
+
+    <nav aria-label="...">
+      <ul *ngIf="pages" class="pagination justify-content-end">
+        <li [ngClass]="i==page?'active':''" *ngFor="let p of pages;let i=index">
+          <a (click)="onPage(i)">{{i}}</a>
+        </li>
+      </ul>
+    </nav>
+
+
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,42 @@
+<nb-card>
+    <div *ngIf="registerForm.valid && submitted">
+    <nb-alert status="success" accent="danger">les données sont enregistré avec success!</nb-alert>
+</div>
+    <nb-card-header>Region</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #n="ngForm" (ngSubmit)="onSubmit(n.value)">
+
+            <div>
+                <label>Region</label>
+                <input type="text" nbInput fullWidth shape="round" formControlName="nom" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.nom.errors }" />
+                <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
+                    <div *ngIf="f.nom.errors.required">la Region est requis</div>
+                    <div *ngIf="f.nom.errors.nom"><b>la Region doit d'etre nationnal ou internationnal</b></div>
+
+                </div>
+
+
+                <label>Description</label>
+                <textarea nbInput fullWidth shape="round" placeholder="Description" type="text"
+                    formControlName="description" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+                <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                    <div *ngIf="f.description.errors.required">description est requis</div>
+
+                </div>
+
+
+            </div>
+
+<hr>
+            <nb-card-footer>
+                <button class="cancel" nbButton status="danger" (click)="onClose()">Cancel</button> &nbsp;
+                <button nbButton status="success">Register</button>
+
+
+            </nb-card-footer>
+        </form>
+    </nb-card-body>
+
+</nb-card>

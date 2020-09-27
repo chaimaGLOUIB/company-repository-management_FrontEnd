@@ -1,0 +1,62 @@
+<nb-card>
+    <nb-card-header>Utilisateur</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #n="ngForm" (ngSubmit)="onSubmit(n.value)">
+
+            <div>
+                <label>Nom</label>
+                <input type="text" nbInput fullWidth shape="round" formControlName="name" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                    <div *ngIf="f.name.errors.required">nom est requis</div>
+
+                </div>
+
+
+                <label>Username</label>
+                <input type="text" nbInput fullWidth shape="round" formControlName="username" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">Username est requis</div>
+
+                </div>
+                <label>Email</label>
+                <input type="email" nbInput fullWidth shape="round" formControlName="email" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email est requis</div>
+
+                </div>
+                <label>Role</label>
+                <nb-select multiple formControlName="roles" fullWidth shape="round"
+                    [ngClass]="{ 'is-invalid': submitted && f.roles.errors }">
+
+                    <nb-option value="admin">Admin</nb-option>
+                    <nb-option value="user">User</nb-option>
+
+
+                </nb-select>
+                <div *ngIf="submitted && f.roles.errors" class="invalid-feedback">
+                    <div *ngIf="f.roles.errors.required">roles est requis</div>
+                </div>
+                <label>Password</label>
+                <input type="password" nbInput fullWidth shape="round" formControlName="password" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">password est requis</div>
+
+                </div>
+
+            </div>
+
+            <hr>
+            <nb-card-footer>
+                <button class="cancel" nbButton status="danger" (click)="onClose()">Cancel</button> &nbsp;
+                <button nbButton status="success">Register</button>
+
+
+            </nb-card-footer>
+        </form>
+    </nb-card-body>
+
+</nb-card>

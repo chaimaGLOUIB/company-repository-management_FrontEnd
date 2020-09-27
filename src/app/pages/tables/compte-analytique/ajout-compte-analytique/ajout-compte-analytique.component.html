@@ -1,0 +1,34 @@
+<nb-card>
+    <nb-card-header>Compte Analytique</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #r="ngForm" (ngSubmit)="onSubmit(r.value)">
+            
+
+               
+                    <label>Compte Analytique</label>
+                    <input type="text" nbInput fullWidth shape="round" placeholder="Compte" formControlName="compte"  [ngClass]="{ 'is-invalid': submitted && f.compte.errors }" />
+                    <div *ngIf="submitted && f.compte.errors" class="invalid-feedback" class="form-control">
+                        <div *ngIf="f.compte.errors.required">le nom de la compte est requis</div>
+                        <div *ngIf="f.compte.errors.compte"><b>la compte doit etre '820000' ou '1740100' ou '1754900'</b></div>
+
+                    </div>
+                   
+             
+               
+                    <label>Description</label>
+                    <textarea type="text" nbInput fullWidth shape="round" placeholder="Description" formControlName="description" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.description.errors }" ></textarea>
+                    <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                        <div *ngIf="f.description.errors.required">description est requis</div>
+                    </div>
+                    <hr>
+                    <nb-card-footer>
+                        <button class="cancel" nbButton status="danger" (click)="onClose()">Cancel</button> &nbsp;
+                        <button nbButton status="success">Register</button>
+        
+        
+                    </nb-card-footer>
+                </form>
+            </nb-card-body>
+        
+        </nb-card>

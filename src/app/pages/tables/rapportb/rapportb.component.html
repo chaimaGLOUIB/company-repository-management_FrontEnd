@@ -1,0 +1,59 @@
+<nb-alert *ngIf="alert" status="danger" closable (click)="onClose()">la date d'affectation de cette machine a été expiré veuillez affecter la machine à une nouvelle zone</nb-alert>
+
+<nb-card>
+    <nb-card-header>
+     Les Rapports
+    </nb-card-header>
+  
+    <nb-card-body >
+      
+      <a  href="/pages/Rapport/Rapport_Budget_Machine/Ajout_Rapport_Machine"><button class="float-right btn btn-primary"><i
+        class="fa fa-plus"></i>Nouveau Rapport Machine</button></a> <br>
+      
+              <table class="table table-striped table-dark">
+  
+                <thead>
+                  <tr >
+  
+                    <th scope="col">Machine</th>
+                    <th scope="col">Zone</th>
+                    <th scope="col">Prestation</th>
+                    <th scope="col">Periode</th>
+                    <th scope="col">Action</th>
+
+                  </tr>
+                </thead>
+                <tbody *ngIf="Rapports">
+
+                  <tr *ngFor="let p of Rapports" >
+                    
+  
+                    <td>{{p.equipement.nom}}</td>
+                    <td>{{p.zone.nom}}</td>
+                    <td>{{p.prestation.nom}}</td>
+                    <td>{{p.periode}}</td>
+  
+                    <td>
+                      <button nbButton status="info" (click)="afficher(p)"><i class="fa fa-eye"></i>afficher</button>&nbsp;
+                      <button nbButton status="success" (click)="ajoutBudget(p)"><i class="fa fa-plus"></i>ajouter_budget</button>&nbsp;
+                      <button nbButton status="primary" (click)="Editer(p.id)"><i class="fa fa-edit"></i>Editer</button>&nbsp;
+                      <button nbButton status="danger" (click)="Supprimer(p.id)"><i class="nb nb-trash"></i>Supprimer</button>&nbsp;
+                      <button nbButton status="warning" (click)="telecharger(p.id)"><i
+                          class="fa fa-download"></i>Telecharger</button>
+          
+                    </td>
+                  </tr>
+  
+  
+                </tbody>
+              </table>
+              <ul *ngIf="pages" class="nav justify-content-end">
+                <li [ngClass]="i==page?'active':''" *ngFor="let p of pages;let i=index">
+                  <a (click)="onPage(i)">{{i}}</a>
+                </li>
+              </ul>
+  
+            
+      </nb-card-body>
+      </nb-card>
+     

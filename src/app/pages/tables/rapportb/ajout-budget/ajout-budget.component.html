@@ -1,0 +1,51 @@
+<nb-card  *ngIf="rapport">
+    <nb-card-header>Nouveau Budget</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #n="ngForm" (ngSubmit)="onSubmit(n.value)">
+                <label>date</label>
+                <input type="date" class="form-control"  nbInput fullWidth shape="round" placeholder="date" formControlName="date"
+                    [ngClass]="{ 'is-invalid': submitted && f.date.errors }" />
+                <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
+                    <div *ngIf="f.date.errors.required">date est requis</div>
+
+                </div>
+
+
+
+
+
+
+                <label>Budget</label>
+                <input type="number" class="form-control"  nbInput fullWidth shape="round" formControlName="budget" 
+                    [ngClass]="{ 'is-invalid': submitted && f.budget.errors }" />
+                <div *ngIf="submitted && f.budget.errors" class="invalid-feedback">
+                    <div *ngIf="f.budget.errors.required">budget est requis</div>
+
+                </div>
+
+
+                <label>planifié Actualisé</label>
+                <input type="number" formControlName="planifieActualise" class="form-control"  nbInput fullWidth shape="round"
+                    [ngClass]="{ 'is-invalid': submitted && f.planifieActualise.errors }" />
+
+
+                <label>Forecast 1</label>
+                <input type="number" formControlName="forecast1" class="form-control"  nbInput fullWidth shape="round"
+                    [ngClass]="{ 'is-invalid': submitted && f.forecast1.errors }" />
+
+
+                <label>Forecast2</label>
+                <input type="number" formControlName="forecast2" class="form-control"  nbInput fullWidth shape="round"
+                    [ngClass]="{ 'is-invalid': submitted && f.forecast2.errors }" />
+            
+            <hr>
+            <nb-card-footer>
+                <button class="cancel" nbButton status="danger" (click)="onClose()">Cancel</button> &nbsp;
+                <button nbButton status="success">Register</button>
+
+
+            </nb-card-footer>
+        </form>
+    </nb-card-body>
+
+</nb-card>

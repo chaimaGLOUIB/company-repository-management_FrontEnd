@@ -1,0 +1,240 @@
+<div id="content" #content>  
+  <nb-card>
+
+    <nb-card-header>Rapport Journalier  <div class="float-right"><img src="/assets/icons/logo.jpg"></div>
+      <br /> Le {{rapport.date}}
+    </nb-card-header>
+
+    <nb-card-body *ngIf="rapport">
+
+      <div class="row show-grid">
+        <div class="col-md-3">
+          <div>
+            <label>Machine :</label>
+            {{rapport.equipement.nom}}
+          </div>
+          <div>
+            <label>Chantier :</label>
+            {{rapport.chantier.nom}}
+          </div>
+          <div>
+            <label>Propriétaire :</label>
+            {{rapport.sous_traitant.nom}}
+          </div>
+
+        </div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3">
+          <div>
+            <label>N° sondage :</label>
+            {{rapport.sondage.sondage}}
+          </div>
+          <div>
+            <label>Prestation :</label>
+            {{rapport.prestation.nom}}
+          </div>
+          <div>
+            <label>Diamètre :</label>
+            {{rapport.diametre.diametre}}
+          </div>
+          <div>
+            <label>Nombre de poste :</label>
+            {{rapport.nombrePoste}}
+          </div>
+        </div>
+      </div>
+      <h7>N°Poste:{{rapport.posteRapport.numPoste}}</h7>
+      <table class="table table-striped table-dark">
+
+        <thead>
+          <tr>
+
+            <th scope="col">N°Poste</th>
+            <th scope="col">Heure Début théo</th>
+            <th scope="col">Heure Fin théo</th>
+            <th scope="col">Heure Début réelle</th>
+            <th scope="col">Heure Fin réelle</th>
+            <th scope="col">Avancement</th>
+            <th scope="col">Récupération</th>
+            <th scope="col">Compteur Fin</th>
+            <th scope="col">HM</th>
+            <th scope="col">HA</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+
+            <td>{{rapport.posteRapport.numPoste}}</td>
+            <td>{{rapport.posteRapport.heureDebutTh}}</td>
+            <td>{{rapport.posteRapport.heureFinTh}}</td>
+            <td>{{rapport.posteRapport.heureDebutRe}}</td>
+            <td>{{rapport.posteRapport.heureFinRe}}</td>
+            <td>{{rapport.posteRapport.avancement}}</td>
+            <td>{{rapport.posteRapport.recuperation}}</td>
+            <td>{{rapport.posteRapport.compteurFin}}</td>
+            <td>{{rapport.posteRapport.hm}}</td>
+            <td>{{rapport.posteRapport.ha}}</td>
+
+
+
+          </tr>
+
+
+        </tbody>
+      </table>
+      <hr>
+      <h7>Les Arrets</h7>
+      <table class="table table-striped table-dark">
+
+        <thead>
+          <tr>
+
+            <th scope="col">Type_Arret</th>
+            <th scope="col">Heure Début </th>
+            <th scope="col">Heure Fin </th>
+            <th scope="col">Heure Arret</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of rapport.arretRapport">
+
+            <td>{{p.typeArret.typeArret}}</td>
+            <td>{{p.heureDebut}}</td>
+            <td>{{p.heureFin}}</td>
+            <td>{{p.heureArret}}</td>
+
+          </tr>
+
+
+        </tbody>
+      </table>
+
+      <hr>
+      <h7>Les Consommables</h7>
+      <table class="table table-striped table-dark">
+
+        <thead>
+          <tr>
+            <th scope="col">Consommable </th>
+            <th scope="col">N°Serie</th>
+            <th scope="col">Marque Consommable </th>
+            <th scope="col">Quantité</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of rapport.consommableRapport">
+
+            <td>{{p.consommable}}</td>
+            <td>{{p.numSerie}}</td>
+            <td>{{p.marque.marqueConsommable}}</td>
+            <td>{{p.quantite}}</td>
+
+
+          </tr>
+
+
+        </tbody>
+      </table>
+
+      <h7>consommation Gasoil</h7>
+      <table class="table table-striped table-dark">
+
+        <thead>
+          <tr>
+
+            <th scope="col">Compteur Debut</th>
+            <th scope="col">compteur Fin </th>
+            <th scope="col">Consomation</th>
+            <th scope="col">Commentaire</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{rapport.consommationGasoilRapport.compteurDebut}}</td>
+            <td>{{rapport.consommationGasoilRapport.compteurF}}</td>
+            <td>{{rapport.consommationGasoilRapport.consommationGasoil}}</td>
+            <td>{{rapport.consommationGasoilRapport.commentaire}}</td>
+
+
+
+
+          </tr>
+
+
+        </tbody>
+      </table>
+      <hr>
+      <h7>Les Appareils</h7>
+      <table class="table table-striped table-dark">
+
+        <thead>
+          <tr>
+
+            <th scope="col">Déviation</th>
+            <th scope="col">Appareil </th>
+            <th scope="col">Observation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of rapport.appareilRapport">
+
+            <td>{{p.deviation}}</td>
+            <td>{{p.appareil.nom}}</td>
+            <td>{{p.observation}}</td>
+
+
+          </tr>
+
+
+        </tbody>
+      </table>
+      <hr>
+      <h7>Les Collaborateurs</h7>
+      <table class="table table-striped table-dark">
+
+        <thead>
+          <tr>
+
+            <th scope="col">Matricule</th>
+            <th scope="col">Nom </th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Fonction</th>
+            <th scope="col">Presence </th>
+            <th scope="col">Motif</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of rapport.collaborateurRapport">
+            <td>{{p.matricule}}</td>
+            <td>{{p.nom}}</td>
+            <td>{{p.prenom}}</td>
+            <td>{{p.fonction}}</td>
+            <td>{{p.absence}}</td>
+            <td>{{p.motif}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr>
+      <label>Fait Marquant:</label><br />
+      {{rapport.faitManquante}}
+  
+    
+  </nb-card-body>
+
+
+
+</nb-card>
+</div>
+
+  <button class="float-right btn btn-primary" (click)="downloadAsPDF()"><i
+    class="fa fa-download"></i>telecharger</button>

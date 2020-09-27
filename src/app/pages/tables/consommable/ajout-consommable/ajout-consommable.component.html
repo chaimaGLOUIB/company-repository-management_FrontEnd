@@ -1,0 +1,72 @@
+<nb-card>
+    <nb-card-header>Consommable</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #n="ngForm" (ngSubmit)="onSubmit(n.value)">
+
+
+
+            <label>Consommable</label>
+            <input type="text" nbInput fullWidth shape="round" placeholder="Consommable" formControlName="nom" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.nom.errors }" />
+            <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
+                <div *ngIf="f.nom.errors.required">Consommable est requis</div>
+
+            </div>
+
+
+            <label>N° Serie</label>
+            <input type="text" formControlName="numSerie" nbInput fullWidth shape="round" placeholder="Compte" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.numSerie.errors }" />
+            <div *ngIf="submitted && f.numSerie.errors" class="invalid-feedback">
+                <div *ngIf="f.numSerie.errors.required">N° Serie est requis</div>
+
+            </div>
+
+
+
+            <label>Description</label>
+                    <textarea type="text" nbInput fullWidth shape="round" placeholder="Description" formControlName="description" 
+                        [ngClass]="{ 'is-invalid': submitted && f.description.errors }" class="form-control" ></textarea>
+                    <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                        <div *ngIf="f.description.errors.required">description est requis</div>
+                    </div>
+
+
+
+
+
+            <label>Marque_Consommable</label>
+            <nb-select  fullWidth shape="round"  formControlName="marque_consommable" 
+                [ngClass]="{ 'is-invalid': submitted && f.marque_consommable.errors }" *ngIf="marque_consommables">
+                
+
+                <nb-option *ngFor="let r of marque_consommables" [value]="r">{{r.marqueConsommable}}</nb-option>
+
+            </nb-select>
+            <div *ngIf="submitted && f.marque_consommable.errors" class="invalid-feedback">
+                <div *ngIf="f.marque_consommable.errors.required"> Type Consommable est requis</div>
+            </div>
+
+
+
+
+            <label>Etat</label>
+            <nb-select fullWidth shape="round" formControlName="etat" 
+                [ngClass]="{ 'is-invalid': submitted && f.etat.errors }">
+                <nb-option value="Active">Active</nb-option>
+                <nb-option value="Inactive">Inactive</nb-option>
+            </nb-select>
+            <div *ngIf="submitted && f.etat.errors" class="invalid-feedback">
+                <div *ngIf="f.etat.errors.required">etat est requis</div>
+            </div>
+            <hr>
+            <nb-card-footer>
+                <button class="cancel" nbButton status="danger" (click)="onClose()">Cancel</button> &nbsp;
+                <button nbButton status="success">Register</button>
+
+
+            </nb-card-footer>
+        </form>
+    </nb-card-body>
+
+</nb-card>

@@ -1,0 +1,63 @@
+<nb-card>
+    <nb-card-header>Horaire Poste</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #r="ngForm" (ngSubmit)="onSubmit(r.value)">
+
+
+            <label>nombre_poste</label>
+            <nb-select  fullWidth shape="round" formControlName="nombrePoste" 
+                [ngClass]="{ 'is-invalid': submitted && f.nombrePoste.errors }">
+
+                <nb-option value="2">2</nb-option>
+                <nb-option value="3">3</nb-option>
+
+            </nb-select>
+            <div *ngIf="submitted && f.nombrePoste.errors" class="invalid-feedback">
+                <div *ngIf="f.nombrePoste.errors.required">nombre_poste est requis</div>
+            </div>
+
+            <div formArrayName="postes">
+                <div class="col-12" *ngFor="let group of posteArray.controls; let i = index;" [formGroupName]="i">
+                    <label> Poste {{i+1}} </label>
+                    <nb-select   fullWidth shape="round" formControlName="numPoste" [ngClass]="{ 'is-invalid': submitted && group.controls.numPoste.errors }" 
+                    >
+                        <nb-option value="1">1</nb-option>
+                        <nb-option value="2">2</nb-option>
+                        <nb-option value="3">3</nb-option>
+                    </nb-select>
+                    <div *ngIf="submitted && group.controls.numPoste.errors" class="invalid-feedback">
+                        <div *ngIf="group.controls.numPoste.errors.required"> N° poste est requis</div>
+                    </div>
+
+
+                    <label >Heure Debut</label>
+                    <input  class="form-control" type="time"  nbInput fullWidth shape="round" formControlName="heureDebutTh" [ngClass]="{ 'is-invalid': submitted && group.controls.heureDebutTh.errors }" placeholder="Enter heure Debut">
+
+                    <div *ngIf="submitted && group.controls.heureDebutTh.errors" class="invalid-feedback">
+                        <div *ngIf="group.controls.heureDebutTh.errors.required"> heure Debut est requis</div>
+                    </div>
+
+
+
+                    <label >Heure Fin</label>
+                    <input  class="form-control" type="time" nbInput fullWidth shape="round" formControlName="heureFinTh" [ngClass]="{ 'is-invalid': submitted && group.controls.heureFinTh.errors }" placeholder="Enter heure Fin">
+
+                    <div *ngIf="submitted && group.controls.heureFinTh.errors" class="invalid-feedback">
+                        <div *ngIf="group.controls.heureFinTh.errors.required"> heure Fin est requis</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <hr>
+            <nb-card-footer>
+                <button class="cancel" nbButton status="danger" (click)="onClose()">Cancel</button> &nbsp;
+                <button nbButton status="success">Register</button>
+
+
+            </nb-card-footer>
+        </form>
+    </nb-card-body>
+
+</nb-card>

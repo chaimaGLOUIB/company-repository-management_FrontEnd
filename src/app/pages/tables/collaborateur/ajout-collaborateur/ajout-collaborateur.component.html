@@ -1,0 +1,91 @@
+<nb-card>
+    <nb-card-header>Collaborateur</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #n="ngForm" (ngSubmit)="onSubmit(n.value)">
+
+            <label>Matricule</label>
+            <input type="text" nbInput fullWidth shape="round" placeholder="Matricule" formControlName="matricule"
+                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.matricule.errors }" />
+            <div *ngIf="submitted && f.matricule.errors" class="invalid-feedback">
+                <div *ngIf="f.matricule.errors.required">le matricule est requis</div>
+                <div *ngIf="f.matricule.errors.matricule"> <b>la matricule doit d'etre 'AGHERMI' ou 'AGNAOU' ou
+                        'AITLARBI' </b></div>
+
+            </div>
+
+
+
+            <label>Nom</label>
+            <input type="text" nbInput fullWidth shape="round" placeholder="Nom" formControlName="nom"
+                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nom.errors }" />
+            <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
+                <div *ngIf="f.nom.errors.required">le nom est requis</div>
+
+            </div>
+
+
+            <label>Prenom</label>
+            <input type="text" nbInput fullWidth shape="round" placeholder="Prenom" formControlName="prenom" 
+                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.prenom.errors }" />
+            <div *ngIf="submitted && f.prenom.errors" class="invalid-feedback">
+                <div *ngIf="f.prenom.errors.required">description est requis</div>
+
+            </div>
+
+
+
+            <label>Zone</label>
+            <nb-select formControlName="zone"   fullWidth shape="round"
+                [ngClass]="{ 'is-invalid': submitted && f.zone.errors }" *ngIf="zones">
+
+                <nb-option *ngFor="let r of zones" [value]="r">{{r.nom}}</nb-option>
+
+            </nb-select>
+            <div *ngIf="submitted && f.zone.errors" class="invalid-feedback">
+                <div *ngIf="f.zone.errors.required"> zone est requis</div>
+            </div>
+
+
+
+
+            <label>Fonction</label>
+            <nb-select formControlName="fonction" fullWidth shape="round"
+                [ngClass]="{ 'is-invalid': submitted && f.fonction.errors }">
+                <nb-option value="Sondeur">Sondeur</nb-option>
+                <nb-option value="aide sondeur">aide sondeur</nb-option>
+                <nb-option value="Chef"> chef </nb-option>
+                <nb-option value="Gardien"> gardien</nb-option>
+
+            </nb-select>
+            <div *ngIf="submitted && f.fonction.errors" class="invalid-feedback">
+                <div *ngIf="f.fonction.errors.required">fonction est requis</div>
+            </div>
+
+
+            <label>Date_Embauche</label>
+            <input type="date" nbInput fullWidth shape="round" formControlName="date_embauche" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.date_embauche.errors }" />
+            <div *ngIf="submitted && f.date_embauche.errors" class="invalid-feedback">
+                <div *ngIf="f.date_embauche.errors.required">Date_Embauche est requis</div>
+
+            </div>
+
+
+            <label>Date_Depart</label>
+            <input type="date" nbInput fullWidth shape="round" ormControlName="date_depart" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.date_depart.errors }" />
+            <div *ngIf="submitted && f.date_depart.errors" class="invalid-feedback">
+                <div *ngIf="f.date_depart.errors.required">Date_Depart est requis</div>
+</div>
+
+                <hr>
+                <nb-card-footer>
+                    <button class="cancel" nbButton status="danger" (click)="onClose()">Cancel</button> &nbsp;
+                    <button nbButton status="success">Register</button>
+
+
+                </nb-card-footer>
+        </form>
+    </nb-card-body>
+
+</nb-card>

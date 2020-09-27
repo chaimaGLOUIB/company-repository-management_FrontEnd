@@ -1,0 +1,673 @@
+<nb-card>
+  <nb-card-header>
+    Nouveau Rapport Journalier
+  </nb-card-header>
+
+  <nb-card-body>
+
+    <nb-stepper orientation="horizontal">
+      <nb-step label="1" [stepControl]="registerForm1">
+        <form [formGroup]="registerForm1" #formone="ngForm">
+          <div class="row show-grid">
+            <div class="col-6 col-md-4">
+              <label>date</label>
+              <input type="date" class="form-control"  nbInput fullWidth shape="rectangle" formControlName="date"
+                [ngClass]="{ 'is-invalid': submitted && f.date.errors }" />
+              <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
+                <div *ngIf="f.date.errors.required">le nom du date est requis</div>
+
+              </div>
+
+              <label>chantier</label>
+              <nb-select fullWidth shape="rectangle" formControlName="chantier"
+                [ngClass]="{ 'is-invalid': submitted && f.chantier.errors }" *ngIf="chantiers">
+
+
+                <nb-option *ngFor="let r of chantiers" [value]="r">{{r.nom}}</nb-option>
+
+              </nb-select>
+              <div *ngIf="submitted && f.chantier.errors" class="invalid-feedback">
+                <div *ngIf="f.chantier.errors.required"> chantier est requis</div>
+
+              </div>
+
+
+
+              <label>Equipement</label>
+              <nb-select fullWidth shape="rectangle" formControlName="equipement"
+                [ngClass]="{ 'is-invalid': submitted && f.equipement.errors }" *ngIf="equipements">
+
+
+                <nb-option *ngFor="let r of equipements" [value]="r">{{r.nom}}</nb-option>
+
+              </nb-select>
+              <div *ngIf="submitted && f.equipement.errors" class="is-invalid">
+                <div *ngIf="f.equipement.errors.required"> equipement est requis</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-4">
+              <label>Propriétaire</label>
+              <nb-select fullWidth shape="rectangle" formControlName="sous_traitant"
+                [ngClass]="{ 'is-invalid': submitted && f.sous_traitant.errors }" *ngIf="sousTraitants">
+
+
+                <nb-option *ngFor="let r of sousTraitants" [value]="r">{{r.nom}}</nb-option>
+
+              </nb-select>
+              <div *ngIf="submitted && f.sous_traitant.errors" class="invalid-feedback">
+                <div *ngIf="f.sous_traitant.errors.required">le nom du sous_traitant est requis</div>
+
+              </div>
+
+              <label>sondage</label>
+              <nb-select fullWidth shape="rectangle"  formControlName="sondage"
+                [ngClass]="{ 'is-invalid': submitted && f.sondage.errors }" *ngIf="sondages">
+
+
+                <nb-option *ngFor="let r of sondages" [value]="r">{{r.sondage}}</nb-option>
+
+              </nb-select>
+              <div *ngIf="submitted && f.sondage.errors" class="invalid-feedback">
+                <div *ngIf="f.sondage.errors.required"> sondage est requis</div>
+
+              </div>
+
+
+
+              <label>Etat</label>
+              <nb-select fullWidth shape="rectangle" formControlName="etat"
+                [ngClass]="{ 'is-invalid': submitted && f.etat.errors }">
+
+                <nb-option value="En cours">En cours</nb-option>
+                <nb-option value="Acheve">Achevé</nb-option>
+                <nb-option value="Inacheve">Inachevé</nb-option>
+
+
+
+
+              </nb-select>
+              <div *ngIf="submitted && f.etat.errors" class="invalid-feedback">
+                <div *ngIf="f.etat.errors.required">etat est requis</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-4">
+              <label>prestation</label>
+              <nb-select  fullWidth shape="rectangle" formControlName="prestation" 
+                [ngClass]="{ 'is-invalid': submitted && f.prestation.errors }">
+
+                <nb-option *ngFor="let prestation of prestations" [value]="prestation">{{prestation.nom}}
+                </nb-option>
+
+              </nb-select>
+
+              <div *ngIf="submitted && f.prestation.errors" class="invalid-feedback">
+                <div *ngIf="f.prestation.errors.required"> prestation est requis</div>
+
+              </div>
+
+              <label>diametre</label>
+              <nb-select fullWidth shape="rectangle" formControlName="diametre"
+                [ngClass]="{ 'is-invalid': submitted && f.diametre.errors }" *ngIf="diametres">
+
+
+                <nb-option *ngFor="let r of diametres" [value]="r">{{r.diametre}}</nb-option>
+
+              </nb-select>
+              <div *ngIf="submitted && f.diametre.errors" class="is-invalid">
+                <div *ngIf="f.diametre.errors.required"> diametre est requis</div>
+              </div>
+
+
+              <label>Nombre de Poste</label>
+              <input class="form-control"  nbInput fullWidth shape="rectangle" type="number" formControlName="nombrePoste"
+                [ngClass]="{ 'is-invalid': submitted && f.nombrePoste.errors }" />
+              <div *ngIf="submitted && f.nombrePoste.errors" class="invalid-feedback">
+                <div *ngIf="f.nombrePoste.errors.required">le nombre de Poste est requis</div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+          <div>
+            <button nbButton nbStepperNext>prev</button>
+            <button nbButton nbStepperNext>next</button>
+          </div>
+
+        </form>
+      </nb-step>
+
+      <nb-step label="Les Arrets" [stepControl]="registerForm2">
+        <form [formGroup]="registerForm2" #formtwo="ngForm">
+
+          <div formGroupName="posteRapport">
+            <div class="row show-grid">
+              <div class="col-6 col-md-4">
+                <div>
+                  <label>N° poste </label>
+                  <nb-select fullWidth shape="rectangle" formControlName="numPoste"
+                    [ngClass]="{ 'is-invalid': submitted && g.numPoste.errors }" *ngIf="nbPoste">
+
+                    <nb-option *ngFor="let r of nbPoste;let i=index" [value]="i+1">{{i+1}}</nb-option>
+                  </nb-select>
+                  <div *ngIf="submitted && g.numPoste.errors" class="invalid-feedback">
+                    <div *ngIf="g.numPoste.errors.required">N° poste est requis</div>
+                  </div>
+                </div>
+                <label>Heure Debut Theorique </label>
+                <input type="time" class="form-control"  nbInput fullWidth shape="rectangle" formControlName="heureDebutTh"
+                  [ngClass]="{ 'is-invalid': submitted && g.heureDebutTh.errors }" />
+                <div *ngIf="submitted && g.heureDebutTh.errors" class="invalid-feedback">
+                  <div *ngIf="g.heureDebutTh.errors.required">N° poste est requis</div>
+                </div>
+
+                <label>Heure Fin Theorique </label>
+                <input type="time" class="form-control"  nbInput fullWidth shape="rectangle" formControlName="heureFinTh"
+                  [ngClass]="{ 'is-invalid': submitted && g.heureFinTh.errors }" />
+                <div *ngIf="submitted && g.heureFinTh.errors" class="invalid-feedback">
+                  <div *ngIf="g.heureFinTh.errors.required">N° poste est requis</div>
+                </div>
+
+              </div>
+              <div class="col-6 col-md-4">
+                <label>Heure Debut Réelle </label>
+                <input type="time" class="form-control"  nbInput fullWidth shape="rectangle" formControlName="heureDebutRe"
+                  [ngClass]="{ 'is-invalid': submitted && g.heureDebutRe.errors }" />
+                <div *ngIf="submitted && g.heureDebutRe.errors" class="invalid-feedback">
+                  <div *ngIf="g.heureDebutRe.errors.required">N° poste est requis</div>
+                </div>
+
+                <label>Heure Fin Réelle </label>
+                <input type="time" class="form-control"  nbInput fullWidth shape="rectangle" formControlName="heureFinRe"
+                  [ngClass]="{ 'is-invalid': submitted && g.heureFinRe.errors }" />
+                <div *ngIf="submitted && g.heureFinRe.errors" class="invalid-feedback">
+                  <div *ngIf="g.heureFinRe.errors.required">N° poste est requis</div>
+                </div>
+
+
+
+                <label>Avancement</label>
+                <input type="number" class="form-control"  nbInput fullWidth shape="rectangle" formControlName="avancement"
+                  [ngClass]="{ 'is-invalid': submitted && g.avancement.errors }" />
+                <div *ngIf="submitted && g.avancement.errors" class="invalid-feedback">
+                  <div *ngIf="g.avancement.errors.required">Avancement est requis</div>
+
+                </div>
+              </div>
+
+              <div class="col-6 col-md-4">
+                <label>recuperation</label>
+                <input type="number" class="form-control"  nbInput fullWidth shape="rectangle" formControlName="recuperation"
+                  [ngClass]="{ 'is-invalid': submitted && g.recuperation.errors }" />
+                <div *ngIf="submitted && g.recuperation.errors" class="invalid-feedback">
+                  <div *ngIf="g.recuperation.errors.required">recuperation est requis</div>
+
+                </div>
+
+
+                <label>compteurFin</label>
+                <input class="form-control"  nbInput fullWidth shape="rectangle" type="number" formControlName="compteurFin"
+                  [ngClass]="{ 'is-invalid': submitted && g.compteurFin.errors }" />
+                <div *ngIf="submitted && g.compteurFin.errors" class="invalid-feedback">
+                  <div *ngIf="g.compteurFin.errors.required">compteurFin est requis</div>
+
+                </div>
+
+                <label>hm</label>
+                <input class="form-control"  nbInput fullWidth shape="rectangle" type="text" formControlName="hm"
+                  [ngClass]="{ 'is-invalid': submitted && g.hm.errors }" />
+                <div *ngIf="submitted && g.hm.errors" class="invalid-feedback">
+                  <div *ngIf="g.hm.errors.required">hm est requis</div>
+
+                </div>
+
+                <label>ha</label>
+                <input class="form-control"  nbInput fullWidth shape="rectangle" type="text" formControlName="ha"
+                  [ngClass]="{ 'is-invalid': submitted && g.ha.errors }" />
+                <div *ngIf="submitted && g.ha.errors" class="invalid-feedback">
+                  <div *ngIf="g.ha.errors.required">ha est requis</div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <HR>
+
+
+
+          <div formArrayName="arretRapport">
+
+            <div *ngFor="let group of ArretArray.controls; let i = index;" [formGroupName]="i">
+              <table class="table table-dark table-dark">
+                <thead>
+                  <tr *ngIf="(i=== 0)">
+                    <th scope="col">Type Arret</th>
+                    <th scope="col">Heure Debut</th>
+                    <th scope="col">Heure Fin</th>
+                    <th scope="col">Heure Arret</th>
+                    <th scope="col">Actions</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+
+
+                    <td>
+                      <div>
+
+                        <nb-select fullWidth shape="rectangle" formControlName="typeArret"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.typeArret.errors }" *ngIf="typeArrets">
+
+
+                          <nb-option *ngFor="let r of typeArrets" [value]="r">{{r.typeArret}}</nb-option>
+
+                        </nb-select>
+                        <div *ngIf="submitted && group.controls.typeArret.errors" class="is-invalid">
+                          <div *ngIf="group.controls.typeArret.errors.required"> type Arret est requis</div>
+                        </div>
+
+
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <input class="form-control"  nbInput fullWidth shape="rectangle" type="time" formControlName="heureDebut"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.heureDebut.errors }" />
+                        <div *ngIf="submitted && group.controls.heureDebut.errors" class="invalid-feedback">
+                          <div *ngIf="group.controls.heureDebut.errors.required">heureDebut est requis</div>
+
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <input class="form-control"  nbInput fullWidth shape="rectangle" type="time" formControlName="heureFin"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.heureFin.errors }" />
+                        <div *ngIf="submitted && group.controls.heureFin.errors" class="invalid-feedback">
+                          <div *ngIf="group.controls.heureFin.errors.required">heureFin est requis</div>
+
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <input class="form-control"  nbInput fullWidth shape="rectangle" type="text" formControlName="heureArret"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.heureArret.errors }" />
+                        <div *ngIf="submitted && group.controls.heureArret.errors" class="invalid-feedback">
+                          <div *ngIf="group.controls.heureArret.errors.required">heureArret est requis</div>
+
+                        </div>
+                      </div>
+                    </td>
+
+                    <td>
+
+
+                      <img  src="/assets/icons/add.svg" alt="" (click)="addArret()">
+
+
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+
+          <div>
+            <button nbButton nbStepperNext>prev</button>
+            <button nbButton nbStepperNext>next</button>
+          </div>
+
+        </form>
+      </nb-step>
+
+      <nb-step label="Les Consommables" [stepControl]="registerForm3" errorMessage="Name is required.">
+
+        <form [formGroup]="registerForm3" #formtree="ngForm">
+
+
+
+          <div formArrayName="consommableRapport">
+
+            <div *ngFor="let group of ConsommableArray.controls; let i = index;" [formGroupName]="i">
+              <table class="table table-dark table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Consommable {{i+1}}</th>
+                    <th scope="col">N° Serie</th>
+                    <th scope="col">Marque Consommable</th>
+                    <th scope="col">Quantite</th>
+                    <th scope="col">Actions</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div>
+                        <nb-select fullWidth shape="rectangle" formControlName="consommable"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.consommable.errors }"
+                          *ngIf="consommables">
+
+                          <nb-option *ngFor="let r of consommables" [value]="r.nom">{{r.nom}}</nb-option>
+
+                        </nb-select>
+                        <div *ngIf="submitted && group.controls.consommable.errors" class="is-invalid">
+                          <div *ngIf="group.controls.consommable.errors.required"> consommable est requis</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <input class="form-control"  nbInput fullWidth shape="rectangle" type="text" formControlName="numSerie"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.numSerie.errors }" />
+                        <div *ngIf="submitted && group.controls.numSerie.errors" class="invalid-feedback">
+                          <div *ngIf="group.controls.numSerie.errors.required">numSerie est requis</div>
+
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+
+                        <nb-select fullWidth shape="rectangle" formControlName="marque" 
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.marque.errors }" *ngIf="marques">
+
+                          <nb-option *ngFor="let r of marques" [value]="r">{{r.marqueConsommable}}</nb-option>
+
+                        </nb-select>
+                        <div *ngIf="submitted && group.controls.marque.errors" class="is-invalid">
+                          <div *ngIf="group.controls.marque.errors.required"> marque consommable est requis</div>
+                        </div>
+
+                      </div>
+                    </td>
+
+
+                    <td>
+                      <div>
+                        <input class="form-control"  nbInput fullWidth shape="rectangle" type="number" formControlName="quantite"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.quantite.errors }" />
+                        <div *ngIf="submitted && group.controls.quantite.errors" class="invalid-feedback">
+                          <div *ngIf="group.controls.quantite.errors.required">quantite est requis</div>
+
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+
+                        <img src="/assets/icons/add.svg" alt="" (click)="addConsommable()">
+
+                      </div>
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <hr>
+          <h5>Consommation Gasoil</h5>
+          <div formGroupName="consommationGasoilRapport">
+            <div>
+              <label>compteur Debut </label>
+              <input class="form-control"  nbInput fullWidth shape="rectangle" type="number" formControlName="compteurDebut"
+                [ngClass]="{ 'is-invalid': submitted && h.compteurDebut.errors }" />
+              <div *ngIf="submitted && h.compteurDebut.errors" class="invalid-feedback">
+                <div *ngIf="h.compteurDebut.errors.required">compteur Debut est requis</div>
+              </div>
+            </div>
+            <div>
+              <label>compteur Fin </label>
+              <input class="form-control"  nbInput fullWidth shape="rectangle" type="number" formControlName="compteurF"
+                [ngClass]="{ 'is-invalid': submitted && h.compteurF.errors }" />
+              <div *ngIf="submitted && h.compteurF.errors" class="invalid-feedback">
+                <div *ngIf="h.compteurF.errors.required">compteur Fin est requis</div>
+              </div>
+            </div>
+            <div>
+              <label>consommation Gazoil </label>
+              <input class="form-control"  nbInput fullWidth shape="rectangle" type="number" formControlName="consommationGasoil"
+                [ngClass]="{ 'is-invalid': submitted && h.consommationGasoil.errors }" />
+              <div *ngIf="submitted && h.consommationGasoil.errors" class="invalid-feedback">
+                <div *ngIf="h.consommationGasoil.errors.required">consommation Gasoil est requis</div>
+              </div>
+            </div>
+            <div>
+              <label>commentaire </label>
+              <textarea type="text" class="form-control"  nbInput fullWidth shape="rectangle" formControlName="commentaire"
+                [ngClass]="{ 'is-invalid': submitted && h.commentaire.errors }"></textarea>
+
+            </div>
+
+          </div>
+
+
+          <div>
+            <button nbButton nbStepperNext>prev</button>
+            <button nbButton nbStepperNext>next</button>
+          </div>
+
+        </form>
+      </nb-step>
+
+      <nb-step label="Les Appareils" [stepControl]="registerForm4">
+        <form [formGroup]="registerForm4" #formfor="ngForm">
+
+          <div formArrayName="appareilRapport">
+
+            <div *ngFor="let group of AppareilArray.controls; let i = index;" [formGroupName]="i">
+              <table class="table table-dark table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Deviation</th>
+                    <th scope="col">Appareil</th>
+                    <th scope="col">observation</th>
+                    <th scope="col">Actions</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div>
+                        <input class="form-control"  nbInput fullWidth shape="rectangle" type="number" formControlName="deviation"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.deviation.errors }" />
+                        <div *ngIf="submitted && group.controls.deviation.errors" class="invalid-feedback">
+                          <div *ngIf="group.controls.deviation.errors.required">deviation est requis</div>
+
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+
+                        <nb-select fullWidth shape="rectangle" formControlName="appareil"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.appareil.errors }" *ngIf="appareils">
+
+
+                          <nb-option *ngFor="let r of appareils" [value]="r">{{r.nom}}</nb-option>
+
+                        </nb-select>
+                        <div *ngIf="submitted && group.controls.appareil.errors" class="is-invalid">
+                          <div *ngIf="group.controls.appareil.errors.required"> type Arret est requis</div>
+                        </div>
+
+
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <textarea type="text" formControlName="observation" class="form-control"  nbInput fullWidth shape="round"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.observation.errors }"></textarea>
+                        <div *ngIf="submitted && group.controls.observation.errors" class="invalid-feedback">
+                          <div *ngIf="group.controls.observation.errors.required">observation est requis</div>
+
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div><img src="/assets/icons/add.svg" alt="" (click)="addAppareil()">
+
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <HR>
+
+
+          <div>
+            <button nbButton nbStepperNext>prev</button>
+            <button nbButton nbStepperNext>next</button>
+          </div>
+
+        </form>
+      </nb-step>
+      <nb-step label="Les Collaborateurs" [stepControl]="registerForm5">
+        <form [formGroup]="registerForm5" #formfive="ngForm">
+
+          <div formArrayName="collaborateurRapport">
+
+            <div *ngFor="let group of CollaborateurArray.controls; let i = index;" [formGroupName]="i">
+              <table class="table table-dark table-dark">
+                <thead>
+                  <tr *ngIf="(i=== 0)">
+                    <th scope="col">Matricule</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Fonction</th>
+                    <th scope="col">Absence</th>
+                    <th scope="col">Motif</th>
+                    <th scope="col">Action</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+
+
+                    <td>
+                      <div>
+
+                        <nb-select fullWidth shape="rectangle" formControlName="matricule"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.matricule.errors }"
+                          *ngIf="collaborateurs">
+
+
+                          <nb-option *ngFor="let r of collaborateurs" [value]="r.matricule">{{r.matricule}}</nb-option>
+
+                        </nb-select>
+                        <div *ngIf="submitted && group.controls.matricule.errors" class="is-invalid">
+                          <div *ngIf="group.controls.matricule.errors.required"> Matricule est requis</div>
+                        </div>
+
+
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <input class="form-control"  nbInput fullWidth shape="rectangle" type="text" formControlName="nom"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.nom.errors }" />
+                        <div *ngIf="submitted && group.controls.nom.errors" class="invalid-feedback">
+                          <div *ngIf="group.controls.nom.errors.required">nom est requis</div>
+
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <input class="form-control"  nbInput fullWidth shape="rectangle" type="text" formControlName="prenom"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.prenom.errors }" />
+                        <div *ngIf="submitted && group.controls.prenom.errors" class="invalid-feedback">
+                          <div *ngIf="group.controls.prenom.errors.required">prenom est requis</div>
+
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <nb-select fullWidth shape="rectangle" formControlName="fonction"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.fonction.errors }">
+
+                          <nb-option value="Sondeur">Sondeur</nb-option>
+                          <nb-option value="aide sondeur">aide sondeur</nb-option>
+                          <nb-option value="chef">Chef</nb-option>
+                          <nb-option value="gardien">gardien</nb-option>
+
+
+                        </nb-select>
+                        <div *ngIf="submitted && group.controls.fonction.errors" class="invalid-feedback">
+                          <div *ngIf="group.controls.fonction.errors.required">Fonction est requis</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <div>
+                          <nb-radio-group formControlName="absence">
+
+                            <nb-radio  [value]="'Present'">Present</nb-radio>
+
+                            
+                            <nb-radio  [value]="'Absent'">Absent</nb-radio>                          
+                         </nb-radio-group>
+
+
+                        </div>
+
+
+                        <div *ngIf="submitted && group.controls.absence.errors" class="invalid-feedback">
+                          <div *ngIf="group.controls.absence.errors.required">Fonction est requis</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngIf="group.controls.absence.value=='Absent'">
+                        <textarea type="text" formControlName="motif" class="form-control"  nbInput fullWidth shape="rectangle"
+                          [ngClass]="{ 'is-invalid': submitted && group.controls.motif.errors }"></textarea>
+
+                      </div>
+
+                    </td>
+
+                    <td>
+
+
+                      <img src="/assets/icons/add.svg" alt="" (click)="addColaborateur()">
+
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <label>fait Manquant</label>
+            <textarea type="text" formControlName="faitManquante" class="form-control"  nbInput fullWidth shape="round"
+              [ngClass]="{ 'is-invalid': submitted && o.faitManquante.errors }"></textarea>
+
+          </div>
+
+
+          <div>
+            <button nbButton nbStepperNext>prev</button>
+            <button nbButton nbStepperNext (click)="onSubmit()">submit</button>
+          </div>
+
+        </form>
+      </nb-step>
+
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>

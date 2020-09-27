@@ -1,0 +1,92 @@
+<nb-card>
+    <nb-card-header>Sous Traitant</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #r="ngForm" (ngSubmit)="onSubmit(r.value)">
+            
+                    
+                    <div class="row show-grid">
+                        <div class="col-6">
+                            <label>nom</label>
+                            <input type="text"  nbInput fullWidth shape="round"  formControlName="nom" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.nom.errors }" />
+                            <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
+                                <div *ngIf="f.nom.errors.required">le nom de la sous_traitant est requis</div>
+                                <div *ngIf="f.nom.errors.nom">sous_traitant doit etre TechSub ou SPEKTRA ou GEOSOND</div>
+
+                            </div>
+
+                       
+
+                       
+                            <label>Activité</label>
+                            <input type="text"  nbInput fullWidth shape="round"  formControlName="activite" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.activite.errors }" />
+
+                        
+                       
+                            <label>Contact 1</label>
+                            <input type="text"  nbInput fullWidth shape="round"  formControlName="contact1" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.contact1.errors }" />
+
+                      
+                       
+                            <label>Contact 2</label>
+                            <input type="text"  nbInput fullWidth shape="round" formControlName="contact2" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.contact2.errors }" />
+
+                    
+                        
+                            <label>Adresse</label>
+                            <input type="text"  nbInput fullWidth shape="round"  formControlName="adresse" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.adresse.errors }" />
+                        </div>
+                        <div class="col-6">
+                            <label>Télephone</label>
+                            <input type="text"  nbInput fullWidth shape="round"  formControlName="telephone" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.telephone.errors }" />
+
+                        
+                       
+                            <label>Fax</label>
+                            <input type="text"  nbInput fullWidth shape="round"  formControlName="fax" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.fax.errors }" />
+
+                        
+                            <label>Email</label>
+                            <input type="email"  nbInput fullWidth shape="round"  formControlName="email" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.email">adresse email est invalide</div>
+
+                                </div>
+                        
+                            <label>Etat</label>
+                            <nb-select formControlName="etat"  fullWidth shape="round" 
+                                [ngClass]="{ 'is-invalid': submitted && f.etat.errors }">
+                                
+                                <nb-option value="Active">Active</nb-option>
+                                <nb-option value="Inactive">Inactive</nb-option>
+
+                            </nb-select>
+                            <div *ngIf="submitted && f.etat.errors" class="invalid-feedback">
+                                <div *ngIf="f.etat.errors.required">etat est requis</div>
+                            </div>                        </div>
+                      </div>
+                            
+                        
+               
+                    
+                           
+                      
+                            <hr>
+                            <nb-card-footer >
+                                <button class="cancel" nbButton status="danger" (click)="onClose()">Cancel</button> &nbsp;
+                                <button nbButton status="success">Register</button>
+                
+                
+                            </nb-card-footer>
+                        </form>
+                    </nb-card-body>
+                
+                </nb-card>
+

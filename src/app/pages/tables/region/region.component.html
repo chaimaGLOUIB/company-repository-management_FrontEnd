@@ -1,0 +1,56 @@
+<nb-card>
+  <nb-card-header>
+    Region
+  </nb-card-header>
+
+  <nb-card-body >
+    
+    <button class="float-right btn btn-primary" (click)="openDialog()"><i class="fa fa-plus"></i>Ajouter
+      Region</button>
+      <form #f="ngForm" (ngSubmit)="onChercher(f.value)">
+        <div class="form-group">
+          <label>Mot Clé </label>
+          <input type="text" name="cle" ngModel>
+
+          <button type="submit" class="btn btn-primary">Chercher</button>
+        </div>
+
+      </form>
+    <table class="table table-striped table-dark">
+      <thead >
+        <tr>
+          <th scope="col">Region</th>
+          <th scope="col">DESCRIPTION</th>
+          <th scope="col">ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="regions">
+        <tr *ngFor="let p of regions">
+
+          <td>{{p.nom}}</td>
+          <td>{{p.description}}</td>
+
+
+
+
+          <td>
+            <button nbButton status="success" (click)="openDialogEdit(p.id)" ><i class="fa fa-edit"></i>Editer</button>&nbsp;
+            <button  nbButton status="danger" (click)="Supprimer(p.id)"><i class="nb nb-trash"></i>Supprimer</button> 
+            
+      </td>
+        </tr>
+
+
+      </tbody>
+    </table>
+    <nav aria-label="...">
+    <ul *ngIf="pages" class="pagination justify-content-end">
+      <li  [ngClass]="i==page?'active':''" *ngFor="let p of pages;let i=index">
+        <a (click)="onPage(i)">{{i}}</a>
+      </li>
+    </ul>
+</nav>
+
+
+  </nb-card-body>
+</nb-card>

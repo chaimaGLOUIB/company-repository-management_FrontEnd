@@ -1,0 +1,75 @@
+<nb-card>
+    <nb-card-header>Client</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #n="ngForm" (ngSubmit)="onSubmit(n.value)">
+
+            <label>Client</label>
+            <input type="text" nbInput fullWidth shape="round" placeholder="Nom" formControlName="nom" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.nom.errors }" />
+            <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
+                <div *ngIf="f.nom.errors.required">le nom du client est requis</div>
+                <div *ngIf="f.nom.errors.nom"><b>le nom du client doit d'etre parmi cette list 'CMG, SMI, LAFARGE, OCP'</b>
+                </div>
+
+            </div>
+
+
+
+            <label>Description</label>
+            <input type="text" nbInput fullWidth shape="round" placeholder="Description" formControlName="description" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                <div *ngIf="f.description.errors.required">description est requis</div>
+
+            </div>
+
+
+            <label>Type_Client</label>
+            <nb-select   fullWidth shape="round" formControlName="typeClient" 
+                [ngClass]="{ 'is-invalid': submitted && f.typeClient.errors }">
+                
+                <nb-option value="Groupe"> Groupe</nb-option>
+                <nb-option value="Hors Groupe">Hors Groupe</nb-option>
+
+            </nb-select>
+            <div *ngIf="submitted && f.etat.errors" class="invalid-feedback">
+                <div *ngIf="f.etat.errors.required">etat est requis</div>
+            </div>
+
+
+            <label>Pays</label>
+            <nb-select   fullWidth shape="round"  formControlName="pays"  [ngClass]="{ 'is-invalid': submitted && f.pays.errors }"
+                *ngIf="pays">
+
+                <nb-option *ngFor="let p of pays" [value]="p">{{p.nom}}</nb-option>
+
+            </nb-select>
+            <div *ngIf="submitted && f.pays.errors" class="invalid-feedback">
+                <div *ngIf="f.pays.errors.required"> region est requis</div>
+            </div>
+
+
+
+
+
+            <label>Etat</label>
+            <nb-select  fullWidth shape="round"  formControlName="etat" 
+                [ngClass]="{ 'is-invalid': submitted && f.etat.errors }">
+                <nb-option value="Active">Active</nb-option>
+                <nb-option value="Inactive">Inactive</nb-option>
+
+            </nb-select>
+            <div *ngIf="submitted && f.etat.errors" class="invalid-feedback">
+                <div *ngIf="f.etat.errors.required">etat est requis</div>
+            </div>
+            <hr>
+            <nb-card-footer>
+                <button class="cancel" nbButton status="danger" (click)="onClose()">Cancel</button> &nbsp;
+                <button nbButton status="success">Register</button>
+
+
+            </nb-card-footer>
+        </form>
+    </nb-card-body>
+
+</nb-card>

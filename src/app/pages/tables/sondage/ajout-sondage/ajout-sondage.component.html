@@ -1,0 +1,100 @@
+<nb-card>
+    <nb-card-header>Sondage</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #n="ngForm" (ngSubmit)="onSubmit(n.value)">
+
+            <label>sondage</label>
+            <input type="text" nbInput fullWidth shape="round" formControlName="sondage" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.sondage.errors }" />
+            <div *ngIf="submitted && f.sondage.errors" class="invalid-feedback">
+                <div *ngIf="f.sondage.errors.required">le nom du sondage est requis</div>
+                <div *ngIf="f.sondage.errors.sondage"><b>le nom du sondage doit d'etre parmi cette list 'AEFSc3/-72,
+                    DF314/-68, R41AL'</b></div>
+
+            </div>
+
+            <label>Description</label>
+            <textarea type="text" nbInput fullWidth shape="round" placeholder="Description" class="form-control"
+                formControlName="description"
+                [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                <div *ngIf="f.description.errors.required">description est requis</div>
+            </div>
+
+            <label>Type</label>
+            <input type="text" nbInput fullWidth shape="round" formControlName="type" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.type.errors }" />
+            <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                <div *ngIf="f.type.errors.required">description est requis</div>
+                <div *ngIf="f.type.errors.type">le nom du sondage doit d'etre 'sondage' ou 'cheminée'</div>
+
+            </div>
+
+
+            <label>Zone</label>
+            <nb-select formControlName="zone" fullWidth shape="round" [ngClass]="{ 'is-invalid': submitted && f.zone.errors }"
+                *ngIf="zones">
+                
+
+                <nb-option *ngFor="let r of zones" [value]="r">{{r.nom}}</nb-option>
+
+            </nb-select>
+            <div *ngIf="submitted && f.zone.errors" class="invalid-feedback">
+                <div *ngIf="f.zone.errors.required"> zone est requis</div>
+            </div>
+
+
+
+
+            <label>Equipement</label>
+            <nb-select formControlName="equipement"  fullWidth shape="round"
+                [ngClass]="{ 'is-invalid': submitted && f.equipement.errors }" *ngIf="equipements">
+
+                <nb-option *ngFor="let r of equipements" [value]="r">{{r.nom}}</nb-option>
+
+            </nb-select>
+            <div *ngIf="submitted && f.equipement.errors" class="invalid-feedback">
+                <div *ngIf="f.equipement.errors.required"> equipement est requis</div>
+            </div>
+
+
+
+            <label>Cote_Initiale</label>
+            <input type="number" formControlName="code_initiale" nbInput fullWidth shape="round" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.code_initiale.errors }" />
+            <div *ngIf="submitted && f.code_initiale.errors" class="invalid-feedback">
+                <div *ngIf="f.code_initiale.errors.required">code_initiale est requis</div>
+
+            </div>
+
+            <label>Cote_Cible</label>
+            <input type="number" formControlName="code_cible" nbInput fullWidth shape="round" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.code_cible.errors }" />
+            <div *ngIf="submitted && f.code_cible.errors" class="invalid-feedback">
+                <div *ngIf="f.code_cible.errors.required">description est requis</div>
+
+            </div>
+
+            <label>Etat</label>
+            <nb-select formControlName="etat"  fullWidth shape="round"
+                [ngClass]="{ 'is-invalid': submitted && f.etat.errors }">
+                
+                <nb-option value="En cours">En cours</nb-option>
+                <nb-option value="Achevé">Achevé</nb-option>
+                <nb-option value="Inachevé">Inachevé</nb-option>
+
+            </nb-select>
+            <div *ngIf="submitted && f.etat.errors" class="invalid-feedback">
+                <div *ngIf="f.etat.errors.required">etat est requis</div>
+            </div>
+            <hr>
+            <nb-card-footer>
+                <button class="cancel" nbButton status="danger" (click)="onClose()">Cancel</button> &nbsp;
+                <button nbButton status="success">Register</button>
+
+
+            </nb-card-footer>
+        </form>
+    </nb-card-body>
+
+</nb-card>

@@ -1,0 +1,75 @@
+<nb-card>
+    <nb-card-header>Type Arret</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #n="ngForm" (ngSubmit)="onSubmit(n.value)">
+
+            <label>type_arret</label>
+            <input type="text" nbInput fullWidth shape="round" formControlName="typeArret" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.typeArret.errors }" />
+            <div *ngIf="submitted && f.typeArret.errors" class="invalid-feedback">
+                <div *ngIf="f.typeArret.errors.required">le type Arret est requis</div>
+                <div *ngIf="f.typeArret.errors.typeArret"><b>le typeArret doit d'etre parmi cette list 'Fumée/ Poussière,
+                    Electricité, Manque outillage' </b></div>
+
+            </div>
+
+            <label>Description</label>
+            <textarea nbInput fullWidth shape="round" placeholder="Description" type="text"
+                    formControlName="description" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+                <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                    <div *ngIf="f.description.errors.required">description est requis</div>
+
+                </div>
+
+
+
+
+            <label>Categorie_Arret</label>
+           <nb-select fullWidth shape="round"  formControlName="categorieArret" 
+                [ngClass]="{ 'is-invalid': submitted && f.categorieArret.errors }" *ngIf="categorieArrets">
+
+                <nb-option *ngFor="let r of categorieArrets" [value]="r">{{r.categorieArret}}</nb-option>
+
+           </nb-select>
+            <div *ngIf="submitted && f.categorieArret.errors" class="invalid-feedback">
+                <div *ngIf="f.categorieArret.errors.required"> Categorie_Arret est requis</div>
+            </div>
+
+
+
+
+            <label>Client</label>
+           <nb-select fullWidth shape="round"  formControlName="client"
+                [ngClass]="{ 'is-invalid': submitted && f.client.errors }" *ngIf="clients">
+
+                <nb-option *ngFor="let r of clients" [value]="r">{{r.nom}}</nb-option>
+
+           </nb-select>
+            <div *ngIf="submitted && f.client.errors" class="invalid-feedback">
+                <div *ngIf="f.client.errors.required"> client est requis</div>
+            </div>
+
+
+
+
+            <label>Productivité</label>
+           <nb-select fullWidth shape="round" formControlName="productivite"
+                [ngClass]="{ 'is-invalid': submitted && f.productivite.errors }">
+                <nb-option value="OUI">OUI</nb-option>
+                <nb-option value="NON">NON</nb-option>
+           </nb-select>
+            <div *ngIf="submitted && f.productivite.errors" class="invalid-feedback">
+                <div *ngIf="f.productivite.errors.required">Productivité est requis</div>
+            </div>
+            <hr>
+            <nb-card-footer>
+                <button class="cancel" nbButton status="danger" (click)="onClose()">Cancel</button> &nbsp;
+                <button nbButton status="success">Register</button>
+
+
+            </nb-card-footer>
+        </form>
+    </nb-card-body>
+
+</nb-card>

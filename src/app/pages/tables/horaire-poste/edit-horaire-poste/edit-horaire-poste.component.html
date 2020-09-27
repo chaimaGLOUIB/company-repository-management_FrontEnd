@@ -1,0 +1,49 @@
+<nb-card>
+    <nb-card-header>Horaire Poste</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #r="ngForm" (ngSubmit)="onSubmit(r.value)">
+
+
+        
+                    <label> N° Poste </label>
+                    <nb-select   fullWidth shape="round" formControlName="numPoste" [ngClass]="{ 'is-invalid': submitted && f.numPoste.errors }" 
+                     placeholder="Enter heure Debut">
+                        <nb-option value="1">1</nb-option>
+                        <nb-option value="2">2</nb-option>
+                        <nb-option value="3">3</nb-option>
+                    </nb-select>
+                    <div *ngIf="submitted && f.numPoste.errors" class="invalid-feedback">
+                        <div *ngIf="f.numPoste.errors.required"> N° poste est requis</div>
+                    </div>
+
+
+                    <label >Heure Debut</label>
+                    <input  class="form-control" type="time"  nbInput fullWidth shape="round" formControlName="heureDebutTh" [ngClass]="{ 'is-invalid': submitted && f.heureDebutTh.errors }" placeholder="Enter heure Debut">
+
+                    <div *ngIf="submitted && f.heureDebutTh.errors" class="invalid-feedback">
+                        <div *ngIf="f.heureDebutTh.errors.required"> heure Debut est requis</div>
+                    </div>
+
+
+
+                    <label >Heure Fin</label>
+                    <input  class="form-control" type="time" nbInput fullWidth shape="round" formControlName="heureFinTh" [ngClass]="{ 'is-invalid': submitted && f.heureFinTh.errors }" placeholder="Enter heure Fin">
+
+                    <div *ngIf="submitted && f.heureFinTh.errors" class="invalid-feedback">
+                        <div *ngIf="f.heureFinTh.errors.required"> heure Fin est requis</div>
+                    </div>
+               
+
+
+
+            <hr>
+            <nb-card-footer>
+                <button class="cancel" nbButton status="danger" (click)="onClose()">Cancel</button> &nbsp;
+                <button nbButton status="success">Register</button>
+
+
+            </nb-card-footer>
+        </form>
+    </nb-card-body>
+
+</nb-card>

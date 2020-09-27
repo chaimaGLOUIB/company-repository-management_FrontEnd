@@ -1,0 +1,95 @@
+<nb-card>
+    <nb-card-header>Nouveau Rapport Machine</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #n="ngForm" (ngSubmit)="onSubmit(n.value)">
+            <label>Machine</label>
+            <nb-select fullWidth shape="round" formControlName="equipement"
+                [ngClass]="{ 'is-invalid': submitted && f.equipement.errors }" *ngIf="equipements">
+
+                <nb-option *ngFor="let r of equipements" [value]="r">{{r.nom}}</nb-option>
+
+            </nb-select>
+            <div *ngIf="submitted && f.equipement.errors" class="invalid-feedback">
+                <div *ngIf="f.equipement.errors.required"> equipement est requis</div>
+            </div>
+            <nb-alert *ngIf="alert2" status="danger" closable (click)="onClose()">l'affectation de cette machine  a été expiré veuillez faire une
+            nouvelle affectation <br> pour voir les rapports des affectation precedentes veuillez consulter le tableau</nb-alert>
+            <nb-alert *ngIf="alert" status="danger" closable (click)="onClose()">le rapport de cette machine  a été dèja généré veuillez consulter le tableau </nb-alert>
+
+            <label>Prestation</label>
+            <nb-select fullWidth shape="round" formControlName="prestation"
+                [ngClass]="{ 'is-invalid': submitted && f.prestation.errors }" *ngIf="prestations">
+
+                <nb-option *ngFor="let r of prestations" [value]="r">{{r.nom}}</nb-option>
+
+            </nb-select>
+            <div *ngIf="submitted && f.prestation.errors" class="invalid-feedback">
+                <div *ngIf="f.prestation.errors.required"> prestation est requis</div>
+            </div>
+            <label>Zone</label>
+            <nb-select fullWidth shape="round" formControlName="zone"
+                [ngClass]="{ 'is-invalid': submitted && f.zone.errors }" *ngIf="zones">
+
+                <nb-option *ngFor="let r of zones" [value]="r">{{r.nom}}</nb-option>
+
+            </nb-select>
+            <div *ngIf="submitted && f.zone.errors" class="invalid-feedback">
+                <div *ngIf="f.zone.errors.required"> zone est requis</div>
+            </div>
+            <label>periode</label>
+            <input type="text" nbInput fullWidth shape="round" placeholder="periode" formControlName="periode"
+                [ngClass]="{ 'is-invalid': submitted && f.periode.errors }" />
+            <div *ngIf="submitted && f.periode.errors" class="invalid-feedback">
+                <div *ngIf="f.periode.errors.required">periode est requis</div>
+
+            </div>
+
+            <div formArrayName="finance">
+                <div *ngFor="let group of FinanceArray.controls; let i = index;" [formGroupName]="i">
+               
+
+                <label>Date</label>
+                <input type="date" nbInput fullWidth shape="round" formControlName="date"
+                    [ngClass]="{ 'is-invalid': submitted && group.controls.date.errors }" />
+                <div *ngIf="submitted && group.controls.date.errors" class="invalid-feedback">
+                    <div *ngIf="group.controls.date.errors.required">date est requis</div>
+
+                </div>
+
+
+
+
+                <label>Budget</label>
+                <input type="number" formControlName="budget" nbInput fullWidth shape="round"
+                    [ngClass]="{ 'is-invalid': submitted && group.controls.budget.errors }" />
+                <div *ngIf="submitted && group.controls.budget.errors" class="invalid-feedback">
+                    <div *ngIf="group.controls.budget.errors.required">budget est requis</div>
+
+                </div>
+
+                <label>planifié Actualisé</label>
+                <input type="number" formControlName="planifieActualise" nbInput fullWidth shape="round"
+                    [ngClass]="{ 'is-invalid': submitted && group.controls.planifieActualise.errors }" />
+
+
+                <label>Forecast 1</label>
+                <input type="number" formControlName="forecast1" nbInput fullWidth shape="round"
+                    [ngClass]="{ 'is-invalid': submitted && group.controls.forecast1.errors }" />
+
+
+                <label>Forecast2</label>
+                <input type="number" formControlName="forecast2" nbInput fullWidth shape="round"
+                    [ngClass]="{ 'is-invalid': submitted && group.controls.forecast2.errors }" />
+            </div>
+            </div>
+            <hr>
+            <nb-card-footer>
+                <button class="cancel" nbButton status="danger" (click)="onReset()">Cancel</button> &nbsp;
+                <button nbButton status="success">Register</button>
+
+
+            </nb-card-footer>
+        </form>
+    </nb-card-body>
+
+</nb-card>

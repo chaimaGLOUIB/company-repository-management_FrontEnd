@@ -1,0 +1,66 @@
+<nb-card>
+    <nb-card-header>Affectation Equipement</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" #n="ngForm" (ngSubmit)="onSubmit(n.value)">
+           
+                
+                    <label>Equipement</label>
+                    <nb-select formControlName="equipement"  fullWidth shape="round" [ngClass]="{ 'is-invalid': submitted && f.equipement.errors }" *ngIf="equipements">
+                        
+                        <nb-option *ngFor="let r of equipements" [value]="r" >{{r.nom}}</nb-option>
+                        
+                    </nb-select>
+                    <div *ngIf="submitted && f.equipement.errors" class="invalid-feedback">
+                        <div *ngIf="f.equipement.errors.required"> equipement est requis</div>
+                    </div>
+                    
+                    
+                
+                    <label>Compte</label>
+                    <input type="number" nbInput fullWidth shape="round" formControlName="compte" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.compte.errors }" />
+                    <div *ngIf="submitted && f.compte.errors" class="invalid-feedback">
+                      <div *ngIf="f.compte.errors.required">compte est requis</div>
+                      
+                  </div>
+                
+          
+                <label>zone</label>
+                <nb-select  fullWidth shape="round" formControlName="zone" [ngClass]="{ 'is-invalid': submitted && f.zone.errors }" *ngIf="zones">
+                    
+                    <nb-option *ngFor="let r of zones" [value]="r" >{{r.nom}}</nb-option>
+                    
+                </nb-select>
+                <div *ngIf="submitted && f.zone.errors" class="invalid-feedback">
+                    <div *ngIf="f.zone.errors.required"> zone est requis</div>
+                </div>
+                
+                
+            
+            
+                <label>Date Debut</label>
+                <input type="date" nbInput fullWidth shape="round" formControlName="dateDebut" class="form-control"
+                 [ngClass]="{ 'is-invalid': submitted && f.dateDebut.errors }" />
+                <div *ngIf="submitted && f.dateDebut.errors" class="invalid-feedback">
+                  <div *ngIf="f.dateDebut.errors.required">compte est requis</div>
+                  
+              </div>
+            
+                <label>Date Fin</label>
+                <input type="date" nbInput fullWidth shape="round" formControlName="dateFin" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.dateFin.errors }" />
+                <div *ngIf="submitted && f.dateFin.errors" class="invalid-feedback">
+                  <div *ngIf="f.dateFin.errors.required">compte est requis</div>
+                  
+              </div>
+              <hr>
+              <nb-card-footer>
+                  <button class="cancel" nbButton status="danger" (click)="onClose()">Cancel</button> &nbsp;
+                  <button nbButton status="success">Register</button>
+  
+  
+              </nb-card-footer>
+          </form>
+      </nb-card-body>
+  
+  </nb-card>
+  
